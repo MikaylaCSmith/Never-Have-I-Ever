@@ -21,6 +21,16 @@ const DeckSelection = ({ navigation }) => {
     }
   };
 
+  const deleteDeck = async (deckId) => {
+    try {
+      const updatedDecks = customDecks.filter(deck => deck.id !== deckId);
+      setCustomDecks(updatedDecks);
+      await AsyncStorage.setItem('customDecks', JSON.stringify(updatedDecks));
+    } catch (error) {
+      console.error('Error deleting deck:', error);
+    }
+  };
+
   return (
     <View style={globalStyles.container}>
       <Text style={[globalStyles.title, styles.centerText]}>Deck Selection</Text>
@@ -34,16 +44,23 @@ const DeckSelection = ({ navigation }) => {
         </Pressable>
 
         {customDecks.map((deck, index) => (
-          <Pressable
-            key={index}
-            style={[globalStyles.button, styles.deckButton]}
-            onPress={() => navigation.navigate('HowToPlay', { 
-              deckType: 'custom',
-              deckId: deck.id 
-            })}
-          >
-            <Text style={globalStyles.buttonText}>{deck.name}</Text>
-          </Pressable>
+          <View key={index} style={styles.deckWrapper}>
+            <Pressable
+              style={[globalStyles.button, styles.deckButton]}
+              onPress={() => navigation.navigate('HowToPlay', { 
+                deckType: 'custom',
+                deckId: deck.id 
+              })}
+            >
+              <Text style={globalStyles.buttonText}>{deck.name}</Text>
+            </Pressable>
+            <Pressable
+              style={styles.deleteButton}
+              onPress={() => deleteDeck(deck.id)}
+            >
+              <Text style={styles.deleteButtonText}>X</Text>
+            </Pressable>
+          </View>
         ))}
 
         <Pressable
@@ -57,6 +74,7 @@ const DeckSelection = ({ navigation }) => {
   );
 };
 
+
 const styles = StyleSheet.create({
   centerText: {
     textAlign: 'center',
@@ -67,6 +85,22 @@ const styles = StyleSheet.create({
   },
   deckButton: {
     marginVertical: 10,
+  },
+  deckWrapper: {
+    position: 'relative',
+  },
+  deleteButton: {
+    position: 'absolute',
+    top: '50%',
+    right: '10%',
+    padding: 5,
+    backgroundColor: 'grey',
+    borderRadius: 10,
+    zIndex: 1,
+  },
+  deleteButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 
