@@ -11,6 +11,12 @@ A mobile and web application for playing "Never Have I Ever" with friends. Featu
 - Clean, card-based UI design
 - Cross-platform compatibility (iOS, Android, Web)
 
+## Gallery
+![HomeScreen](neverHS.png)
+![Deck Selection Screen](neverDeckSelect.png)
+![How to Play Screen](neverHow.png)
+![Game Screen](neverCard.png)
+
 ## Installation
 
 1. Clone the repository
