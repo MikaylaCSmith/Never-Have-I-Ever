@@ -1,4 +1,4 @@
-# Mikayla's Drinking Game - Never Have I Ever
+# Mikayla's Game - Never Have I Ever
 
 A mobile and web application for playing "Never Have I Ever" with friends. Features a base deck of questions and the ability to create custom decks.
 
@@ -10,6 +10,12 @@ A mobile and web application for playing "Never Have I Ever" with friends. Featu
 - Web support with click-to-advance functionality
 - Clean, card-based UI design
 - Cross-platform compatibility (iOS, Android, Web)
+
+## Gallery
+![HomeScreen](neverHS.png)
+![Deck Selection Screen](neverDeckSelect.png)
+![How to Play Screen](neverHow.png)
+![Game Screen](neverCard.png)
 
 ## Installation
 
