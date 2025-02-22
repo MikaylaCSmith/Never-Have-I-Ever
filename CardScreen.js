@@ -1,14 +1,15 @@
 // CardScreen.js
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet,Pressable, Alert, Platform } from 'react-native';
-import { Accelerometer } from 'expo-sensors';
-import { globalStyles } from './styles'
-import { questions as baseQuestions } from './questions';
-import { Ionicons } from '@expo/vector-icons';
-import { ImageBackground } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, { useState, useEffect } from 'react'; 
+import { View, Text, StyleSheet, Pressable, Alert, Platform } from 'react-native'; 
+import { Accelerometer } from 'expo-sensors'; 
+import { globalStyles } from './styles';
+import { questions as baseQuestions } from './questions'; 
+import { Ionicons } from '@expo/vector-icons'; 
+import { ImageBackground } from 'react-native'; 
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
-
+// Function to shuffle an array using the Fisher-Yates algorithm.
+// It creates a copy of the input array and randomly swaps elements to ensure a uniform shuffle.
 const shuffleArray = (array) => {
   let shuffledArray = array.slice();
   for (let i = shuffledArray.length - 1; i > 0; i--) {
@@ -19,13 +20,17 @@ const shuffleArray = (array) => {
 };
 
 const CardScreen = ({ navigation, route }) => {
+  // State variables to manage the shuffled list of questions.
   const [shuffledQuestions, setShuffledQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
+  // Effect hook to load the deck when the component mounts.
   useEffect(() => {
     loadDeck();
   }, []);
 
+  // Function to load the appropriate deck of questions.
+  // It fetches either the base questions or a custom deck from AsyncStorage and shuffles them.
   const loadDeck = async () => {
     const { deckType, deckId } = route.params || { deckType: 'base' };
     console.log('Loading deck:', { deckType, deckId });
@@ -51,6 +56,7 @@ const CardScreen = ({ navigation, route }) => {
     }
   };
 
+  // Effect hook to collect accelerometer data and trigger the next question.
   useEffect(() => {
     if (Platform.OS !== 'web') {  
       Accelerometer.setUpdateInterval(1000);
